@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Match_34_00: The Cheezer vs AI King LBJ</title>
+  <base href="../../" />
+
+  <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+</head>
+<body>
+<h1>Match_34_00: The Cheezer vs AI King LBJ</h1>
+<div id="patient"><h1 id="patient">Please be patient; boards are loading.</h1></div><h3>Turn 0</h3>
+<p>White's turn.  60000ms left to play.</p>
+
+<div id="turn0000" style="width: 400px"></div>
+<h3>Turn 1</h3>
+<p>Black's turn.  60000ms left to play.</p>
+<div id="turn0001" style="width: 400px"></div>
+<h3>Turn 2</h3>
+<p>White's turn.  59897ms left to play.</p>
+<div id="turn0002" style="width: 400px"></div>
+<h3>Turn 3</h3>
+<p>Black's turn.  59424ms left to play.</p>
+<div id="turn0003" style="width: 400px"></div>
+<h3>Turn 4</h3>
+<p>White's turn.  59690ms left to play.</p>
+<div id="turn0004" style="width: 400px"></div>
+<h3>Turn 5</h3>
+<p>Black's turn.  58759ms left to play.</p>
+<div id="turn0005" style="width: 400px"></div>
+<h3>Turn 6</h3>
+<p>White's turn.  59447ms left to play.</p>
+<div id="turn0006" style="width: 400px"></div>
+<h3>Turn 7</h3>
+<p>Black's turn.  58444ms left to play.</p>
+<div id="turn0007" style="width: 400px"></div>
+<h3>Turn 8</h3>
+<p>White's turn.  59241ms left to play.</p>
+<div id="turn0008" style="width: 400px"></div>
+<h3>Turn 9</h3>
+<p>Black's turn.  57932ms left to play.</p>
+<div id="turn0009" style="width: 400px"></div>
+<h3>Turn 10</h3>
+<p>White's turn.  58762ms left to play.</p>
+<div id="turn0010" style="width: 400px"></div>
+<h3>Turn 11</h3>
+<p>Black's turn.  56651ms left to play.</p>
+<div id="turn0011" style="width: 400px"></div>
+<h3>Turn 12</h3>
+<p>White's turn.  58350ms left to play.</p>
+<div id="turn0012" style="width: 400px"></div>
+<h3>Turn 13</h3>
+<p>Black's turn.  55794ms left to play.</p>
+<div id="turn0013" style="width: 400px"></div>
+<h3>Turn 14</h3>
+<p>White's turn.  57850ms left to play.</p>
+<div id="turn0014" style="width: 400px"></div>
+<h3>Turn 15</h3>
+<p>White's turn.  54375ms left to play.</p>
+<div id="turn0015" style="width: 400px"></div>
+<h3>Check mate!
+Game over!
+</h3>
+<hr/>
+<p>
+<a href="https://chessboardjs.com/">chessboard.js</a>
+is Copyright 2019 Chris Oakman and subject to the following conditions:
+</p><p>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+</p><p>
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+</p><p>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+<img src="/images/wN.png" id="c345-6796-f159-75d5-ad05-9645-4a14-a5b6" alt class="piece-417db" data-piece="wN" style="width: 49px; height: 49px;">
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<script>
+// Hot fix the chessboard javascript to allow extra piece types
+
+//fetch("chessboard-1.0.0.js.orig")     // request original source code
+fetch("https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js") // request original source code
+  .then(response => response.text())    // retreive response
+  .then( text => {                      // run additial Javascript
+    let modifiedText = text.replace( "KQRNBP", "KQRNBPZCF" ); // add ZCF
+    eval(modifiedText);                 // run the modified Javascript
+
+// --- the boards ---------------------------------------------------------
+var board0000 = Chessboard('turn0000', {
+   pieceTheme: '/images/{piece}.png',
+   position:{
+        a1: 'wF',
+        a2: 'wP',
+        a7: 'bP',
+        a8: 'bF',
+        b1: 'wN',
+        b2: 'wP',
+        b7: 'bP',
+        b8: 'bN',
+        c1: 'wC',
+        c2: 'wP',
+        c7: 'bP',
+        c8: 'bC',
+        d1: 'wQ',
+        d2: 'wP',
+        d7: 'bP',
+        d8: 'bQ',
+        e1: 'wK',
+        e2: 'wZ',
+        e7: 'bZ',
+        e8: 'bK',
+        f1: 'wB',
+        f2: 'wP',
+        f7: 'bP',
+        f8: 'bB',
+        g1: 'wN',
+        g2: 'wP',
+        g7: 'bP',
+        g8: 'bN',
+        h1: 'wR',
+        h2: 'wP',
+        h7: 'bP',
+        h8: 'bR'
+   }
+ }
+);
+
+
+    $('#patient').remove();
+    } )
+  .catch(error => console.error("Failed to load script:", error));
+
+</script>
+</body>
+</html>
