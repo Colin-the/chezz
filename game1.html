@@ -15,6 +15,7 @@
 <p id="turn-info">Turn 0: White's turn. 60000ms left to play.</p>
 
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="games/game.js"></script>
 <script>
 fetch("https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js")
   .then(response => response.text())
@@ -23,36 +24,47 @@ fetch("https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.m
     eval(modifiedText);
 
     // --- Board Data ---
-    const boards = [
-      { position: { a1: 'wF', a2: 'wP', a7: 'bP', a8: 'bF', b1: 'wN', b2: 'wP', b7: 'bP', b8: 'bN', c1: 'wC', c2: 'wP', c7: 'bP', c8: 'bC', d1: 'wQ', d2: 'wP', d7: 'bP', d8: 'bQ', e1: 'wK', e2: 'wZ', e7: 'bZ', e8: 'bK', f1: 'wB', f2: 'wP', f7: 'bP', f8: 'bB', g1: 'wN', g2: 'wP', g7: 'bP', g8: 'bN', h1: 'wR', h2: 'wP', h7: 'bP', h8: 'bR' }, info: "Turn 0: White's turn. 60000ms left to play." },
-      { position: { a1: 'wF', a2: 'wP', a7: 'bP', a8: 'bF', b1: 'wN', b2: 'wP', b7: 'bP', b8: 'bN', c1: 'wC', c2: 'wP', c7: 'bP', c8: 'bC', d1: 'wQ', d2: 'wP', d7: 'bP', d8: 'bQ', e1: 'wK', e2: 'wP', e7: 'bP', e8: 'bK', f1: 'wB', f2: 'wP', f7: 'bP', f8: 'bB', g1: 'wN', g2: 'wP', g7: 'bP', g8: 'bN', h1: 'wR', h2: 'wP', h7: 'bP', h8: 'bR' }, info: "Turn 1: Black's turn. 60000ms left to play." },
-      { position: {   a2: 'wP',   a5: 'bP',   a7: 'bF',   b2: 'wF',   b3: 'wP',   b5: 'wC',   b8: 'bN',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR' }, info: "Turn 1: Black's turn. 60000ms left to play."},
-      { position: {   a1: 'wF',   a2: 'wP',   a7: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wP',   b7: 'bP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e2: 'wZ',   e7: 'bZ',   e8: 'bK',   f1: 'wB',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 1 and it is White's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a7: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wP',   b7: 'bP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f1: 'wB',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 2 and it is Black's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a6: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wP',   b7: 'bP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f1: 'wB',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 3 and it is White's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a6: 'wB',   a8: 'bF',   b1: 'wN',   b2: 'wP',   b7: 'bP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 4 and it is Black's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a6: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 5 and it is White's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a6: 'bP',   a8: 'bF',   b1: 'wN',   b3: 'wP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 6 and it is Black's turn to move "},
-{ position: {   a1: 'wF',   a2: 'wP',   a5: 'bP',   a8: 'bF',   b1: 'wN',   b3: 'wP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 7 and it is White's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wF',   b3: 'wP',   b8: 'bN',   c1: 'wC',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 8 and it is Black's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a8: 'bF',   b1: 'wN',   b2: 'wF',   b3: 'wP',   c1: 'wC',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 9 and it is White's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a8: 'bF',   b2: 'wF',   b3: 'wP',   b7: 'wN',   c1: 'wC',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 10 and it is Black's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a8: 'bF',   b2: 'wF',   b3: 'wP',   c1: 'wC',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 11 and it is White's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a8: 'bF',   b1: 'wC',   b2: 'wF',   b3: 'wP',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 12 and it is Black's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a7: 'bF',   b1: 'wC',   b2: 'wF',   b3: 'wP',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 13 and it is White's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a7: 'bF',   b2: 'wF',   b3: 'wP',   b5: 'wC',   c2: 'wP',   c6: 'bN',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 14 and it is Black's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a7: 'bF',   b2: 'wF',   b3: 'wP',   b5: 'wC',   b8: 'bN',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d7: 'bP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   e8: 'bK',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 15 and it is White's turn to move "},
-{ position: {   a2: 'wP',   a5: 'bP',   a7: 'bF',   b2: 'wF',   b3: 'wP',   b5: 'wC',   b8: 'bN',   c2: 'wP',   c7: 'bP',   c8: 'bC',   d1: 'wQ',   d2: 'wP',   d8: 'bQ',   e1: 'wK',   e3: 'wZ',   e7: 'bZ',   f2: 'wP',   f7: 'bP',   f8: 'bB',   g1: 'wN',   g2: 'wP',   g7: 'bP',   g8: 'bN',   h1: 'wR',   h2: 'wP',   h7: 'bP',   h8: 'bR'}, info:"Turn number 16 and it is Black's turn to move "}
-
-      // Add more turns as needed
-    ];
+    
 
     let currentTurn = 0;
 
     // Initialize the board
     const board = Chessboard('board-container', {
       pieceTheme: '/images/{piece}.png',
-      position: boards[currentTurn].position
+      position: boards[currentTurn].position,
+      draggable: true,
+      onDrop: (source, target) => {
+        // Attempt to make the move
+        // const move = game.move({
+        //   from: source,
+        //   to: target,
+        //   promotion: 'Z' 
+        // });
+
+        $.post('validateMove', 
+                { from: source, to: target },
+                function(data,status){
+                    console.log("In Funtion");
+                    alert("Data: " + data + "\nStatus: " + status);
+                }
+            );
+            
+
+        console.log(source," : ",target); // Log the move to the console
+
+        // If the move is illegal, snap the piece back to its original position
+        // if (move === null) {
+        //   return 'snapback';
+        // }
+
+        // Update the turn info
+        //currentTurn++;
+        //document.getElementById('turn-info').textContent = `Turn ${currentTurn}: ${game.turn() === 'w' ? "White's turn" : "Black's turn"}`;
+        
+        // Update the board position after a move
+        //board.position(boards[currentTurn].position); // Add this line to update the board position
+      }
+
     });
 
     $('#patient').remove();

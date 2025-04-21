@@ -210,6 +210,36 @@ class MyServer(BaseHTTPRequestHandler):
 
     
     def do_POST(self):
+        if self.path == "/validateMove":
+            try:
+                content_length = int(self.headers['Content-Length'])
+                post_data = self.rfile.read(content_length)
+                content_type = self.headers.get('Content-Type')
+
+                print('Received POST data:', post_data)
+
+                response = {
+                                'status': 'success',
+                                'message': 'Email is available for registration.'
+                            }
+                             
+                json_response = json.dumps(response)
+                self.send_response(200)  # OK
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(json_response)))
+                self.end_headers()
+                self.wfile.write(json_response.encode('utf-8'))
+
+            except json.JSONDecodeError:
+                self.send_response(400)  # Bad Request
+                self.end_headers()
+                self.wfile.write(b'Invalid JSON format')
+
+            except Exception as e:
+                self.send_response(500)  # Internal Server Error
+                self.end_headers()
+                self.wfile.write(f'Internal server error: {str(e)}'.encode())
+
         if self.path == "/checkEmail":
             try:
                 content_length = int(self.headers['Content-Length'])
