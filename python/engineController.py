@@ -4,6 +4,11 @@ import chezz
 
 
 if __name__ == "__main__":
+    print("live")
+    eval = chezz.getSearchDepth(int(30000),int(950))
+
+    print("From C we have ", ord(eval))
+
     if len(sys.argv) > 2 and sys.argv[2] == "-f":#file option
         #print("Using file")
         algorthymToUse = sys.argv[1] #0 for BFS, 1 for H1 and 2 for H2
