@@ -577,3 +577,116 @@ unsigned char caculatePossibleMoves(Node * instance, char colorToMove){
     //fprintf(stderr,"Total number of moves found: %ld\n\n",numPossibleMoves);
     return 0;
 }
+
+//This function can be used to determine if the move being made is legal
+char isValidNextMove(unsigned char board[8][8], int src, int dest, char colorToMove){
+    // Translate the arguments into array indices
+    int srcX = src / 8, srcY = src % 8;
+    int destX = dest / 8, destY = dest % 8;
+
+    printf("%d %d %d",src,dest,colorToMove);
+    printBoard(board);
+
+    // If there is no piece on the source square, the move is invalid
+    if (board[srcY][srcX] == blankSquare) return 0;
+
+    // If the piece on the source square is not of the color to move, the move is invalid
+    if (!isColor(board[srcY][srcX], colorToMove)) return 0;
+
+    // If the destination square is occupied by a piece of the same color, the move is invalid
+    if (isSquareOccupiedByColor(board, destX, destY, colorToMove)) return 0;
+
+    // Check if the destination square is on the board
+    if (!isOnBoard(destX, destY)) return 0;
+
+    // Determine the type of piece being moved
+    unsigned char piece = board[srcY][srcX];
+
+    // Validate the move based on the piece type
+    switch (piece) {
+        case whitePawn:
+        case blackPawn: {
+            // Pawns can move forward or capture diagonally
+            char moveDirection = (colorToMove == 'w') ? -1 : 1;
+            if (destX == srcX && destY == srcY + moveDirection && board[destY][destX] == blankSquare) {
+                return 1; // Valid forward move
+            }
+            if ((destX == srcX - 1 || destX == srcX + 1) && destY == srcY + moveDirection &&
+                isSquareOccupiedByColor(board, destX, destY, (colorToMove == 'w') ? 'b' : 'w')) {
+                return 1; // Valid capture
+            }
+            return 0; // Invalid pawn move
+        }
+        case whiteKnight:
+        case blackKnight: {
+            // Knights move in an L-shape
+            int dx = abs(destX - srcX);
+            int dy = abs(destY - srcY);
+            if ((dx == 2 && dy == 1) || (dx == 1 && dy == 2)) {
+                return 1; // Valid knight move
+            }
+            return 0; // Invalid knight move
+        }
+        case whiteBishop:
+        case blackBishop: {
+            // Bishops move diagonally
+            if (abs(destX - srcX) == abs(destY - srcY)) {
+                // Check if the path is clear
+                int stepX = (destX > srcX) ? 1 : -1;
+                int stepY = (destY > srcY) ? 1 : -1;
+                int x = srcX + stepX, y = srcY + stepY;
+                while (x != destX && y != destY) {
+                    if (board[y][x] != blankSquare) return 0; // Path is blocked
+                    x += stepX;
+                    y += stepY;
+                }
+                return 1; // Valid bishop move
+            }
+            return 0; // Invalid bishop move
+        }
+        case whiteRook:
+        case blackRook: {
+            // Rooks move horizontally or vertically
+            if (srcX == destX || srcY == destY) {
+                // Check if the path is clear
+                int stepX = (destX == srcX) ? 0 : (destX > srcX ? 1 : -1);
+                int stepY = (destY == srcY) ? 0 : (destY > srcY ? 1 : -1);
+                int x = srcX + stepX, y = srcY + stepY;
+                while (x != destX || y != destY) {
+                    if (board[y][x] != blankSquare) return 0; // Path is blocked
+                    x += stepX;
+                    y += stepY;
+                }
+                return 1; // Valid rook move
+            }
+            return 0; // Invalid rook move
+        }
+        case whiteQueen:
+        case blackQueen: {
+            // Queens move like rooks or bishops
+            if (abs(destX - srcX) == abs(destY - srcY) || srcX == destX || srcY == destY) {
+                // Check if the path is clear
+                int stepX = (destX == srcX) ? 0 : (destX > srcX ? 1 : -1);
+                int stepY = (destY == srcY) ? 0 : (destY > srcY ? 1 : -1);
+                int x = srcX + stepX, y = srcY + stepY;
+                while (x != destX || y != destY) {
+                    if (board[y][x] != blankSquare) return 0; // Path is blocked
+                    x += stepX;
+                    y += stepY;
+                }
+                return 1; // Valid queen move
+            }
+            return 0; // Invalid queen move
+        }
+        case whiteKing:
+        case blackKing: {
+            // Kings move one square in any direction
+            if (abs(destX - srcX) <= 1 && abs(destY - srcY) <= 1) {
+                return 1; // Valid king move
+            }
+            return 0; // Invalid king move
+        }
+        default:
+            return 0; // Unknown piece type
+    }
+}

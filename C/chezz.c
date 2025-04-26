@@ -18,7 +18,7 @@ char flipScore;
 
 //function to determine search depth of the engine based on remaining time
 char getSearchDepth(int remainingTime, int eval){
-
+    fprintf(stderr,"Ran %d %d\n",remainingTime,eval);
     //if the heurstic tells us our advantage is more then being up a queen
     if (eval > whiteQueenWeight){
         //start conserving time as we are winning by so much and can afford to play slightly

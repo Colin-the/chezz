@@ -12,28 +12,35 @@ SWIG = swig
 all: python/_chezz.so #this will comile the C code and set up a shared libary so we can use swig to call this code from python
 # all: engine #this is just if we want the C code to get built
 
+# chezz_wrap.c: chezz.i chezz.h
+# 	$(SWIG) -python -o chezz_wrap.c chezz.i
+
+python/engine.py: chezz.i chezz.h
+	$(SWIG) -python -builtin -I. -outdir ../python/ $<
+
+chezz_wrap.c: python/engine.py
 
 chezzMoves.o: chezzMoves.c chezz.h 
-	$(CC) $(CFLAGS) -c chezzMoves.c -o chezzMoves.o
+	$(CC) $(CFLAGS) -c chezzMoves.c -o chezzMoves.o $(PYTHON_INCLUDES)
 
 chezzUI.o: chezzUI.c chezz.h 
-	$(CC) $(CFLAGS) -c chezzUI.c -o chezzUI.o
+	$(CC) $(CFLAGS) -c chezzUI.c -o chezzUI.o $(PYTHON_INCLUDES)
 
 chezz.o: chezz.c chezz.h 
-	$(CC) $(CFLAGS) -c chezz.c -o chezz.o
+	$(CC) $(CFLAGS) -c chezz.c -o chezz.o $(PYTHON_INCLUDES)
 
 engine.o: Engine.c chezz.h
-	$(CC) $(CFLAGS) -c Engine.c -o engine.o
+	$(CC) $(CFLAGS) -c Engine.c -o engine.o $(PYTHON_INCLUDES)
 
 eval.o: Eval.c chezz.h
-	$(CC) $(CFLAGS) -c Eval.c -o eval.o
+	$(CC) $(CFLAGS) -c Eval.c -o eval.o $(PYTHON_INCLUDES)
 
 opening.o: opening.c chezz.h
-	$(CC) $(CFLAGS) -c opening.c -o opening.o
+	$(CC) $(CFLAGS) -c opening.c -o opening.o $(PYTHON_INCLUDES)
 
 # Compile SWIG wrapper
-chezz_wrap.o: python/engineController.py rushHour_wrap.c rushHour.h
-	$(CC) $(CFLAGS) -c rushHour_wrap.c -o $@ $(PYTHON_INCLUDES)
+chezz_wrap.o: python/engine.py chezz_wrap.c chezz.h
+	$(CC) $(CFLAGS) -c chezz_wrap.c -o $@ $(PYTHON_INCLUDES)
 
 # Build shared library for Python
 python/_chezz.so: chezz.o chezzUI.o chezzMoves.o engine.o eval.o opening.o chezz_wrap.o
@@ -64,4 +71,4 @@ python/_chezz.so: chezz.o chezzUI.o chezzMoves.o engine.o eval.o opening.o chezz
 # 	$(CC) chezz.o chezzUI.o chezzMoves.o engine.o eval.o opening.o -o run $(LDFLAGS)
 
 clean:  
-	rm -f *.o *.so run
+	rm -f *.o *.so run chezz_wrap.c ../python/chezz.py ../python/_chezz.so

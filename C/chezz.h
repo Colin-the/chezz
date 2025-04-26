@@ -246,8 +246,9 @@ void peonMotion(unsigned char board[8][8]);
 unsigned char caculatePossibleMoves(Node * instance, char colorToMove);
 void saveToList(Node instance, char opponentColor);
 void addNodeToGraph(Node * parent, unsigned char board[8][8], char colorMoved);
+char isValidNextMove(unsigned char board[8][8], int src, int dest, char colorToMove);
 
-unsigned long allocateNode();
+//unsigned long allocateNode();
 
 //Function prototypes for the engine
 int heuristic(unsigned char board[8][8], char colorToMove);
@@ -258,7 +259,7 @@ int compareAsc(const void *a, const void *b);
 AlphaBetaResult alphaBeta(Node *node, int depthLimit, int alpha, int beta, char current_color, char maximizingColor);
 Node *findBestMove(Node *root, int depthLimit, char maximizingColor);
 Node *STfindBestMove(Node *root, int depthLimit, char maximizingColor);
-void* alphaBetaThread(void *arg);
+//void* alphaBetaThread(void *arg);
 void* thread_func(void* arg);
 
 
@@ -282,7 +283,7 @@ void addToOpeningBook(unsigned char currentBoard[8][8], char color, unsigned cha
 void importGameToDatabase(char* folderPath);
 
 
-void generateOpeningBook(int max_moves);
-void initializeStartBoard(unsigned char board[8][8]);
-void explorePosition(Node* node, char color, int move_number, int max_depth, FILE* book);
-void processNode(Node* node, char color, int move_number, FILE* book);
+//void generateOpeningBook(int max_moves);
+//void initializeStartBoard(unsigned char board[8][8]);
+//void explorePosition(Node* node, char color, int move_number, int max_depth, FILE* book);
+//void processNode(Node* node, char color, int move_number, FILE* book);
