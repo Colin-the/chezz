@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     print("From C we have ", ord(eval))
 
-    is_valid = chezz.isValidNextMove(board, src, dest, color_to_move)
+    is_valid = chezz.isValidNextMove(exampleBoard, src, dest, color_to_move)
 
     if is_valid:
         print("The move is valid!")

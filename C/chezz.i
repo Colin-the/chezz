@@ -5,6 +5,10 @@
 %{
 #include "chezz.h"
 %}
+%include "numpy.i"
+%init %{
+  import_array();
+%}
 
 %include "typemaps.i"
 
@@ -27,6 +31,10 @@
 %typemap(freearg) char* {
     // No manual memory management needed for stack-allocated input
 }
+
+// This applies the 2D‐array typemap to your board parameter
+%apply (unsigned char IN_ARRAY2, int DIM1, int DIM2)
+  { (unsigned char board[8][8], int DIM1, int DIM2) };
 
 // Include the header
 %include "chezz.h"

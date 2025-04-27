@@ -6,8 +6,10 @@ CC = gcc
 CFLAGS = -std=c11 -g -fPIC -D_POSIX_C_SOURCE=200112L 
 LDFLAGS = -pthread -lrt
 
-PYTHON_INCLUDES = $(shell python3-config --includes)
+PYTHON_INCLUDES = $(shell python3.11-config --includes)
 SWIG = swig
+SWIG_LIB        := $(shell $(SWIG) -swiglib)
+SWIG_INCLUDES   := -I. -I$(SWIG_LIB)
 
 all: python/_chezz.so #this will comile the C code and set up a shared libary so we can use swig to call this code from python
 # all: engine #this is just if we want the C code to get built

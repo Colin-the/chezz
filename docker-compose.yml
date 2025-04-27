@@ -1,0 +1,9 @@
+services:
+  python-app:
+    build: .
+    container_name: python3_11_container
+    volumes:
+      - /c/Users/legoc/school/chezz/:/app
+    ports:
+      - "8000:8000"
+    
