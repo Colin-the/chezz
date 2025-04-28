@@ -38,6 +38,8 @@ RUN ln -s /usr/local/bin/pip3.11 /usr/local/bin/pip
 RUN pip install numpy
 RUN apt-get update && \
     apt-get install -y swig
+RUN apt-get update && \
+    apt-get install -y python3-numpy-dev
 
 # Set working directory
 WORKDIR /app
